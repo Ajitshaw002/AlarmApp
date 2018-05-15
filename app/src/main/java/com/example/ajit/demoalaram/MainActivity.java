@@ -64,7 +64,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // Check if we're running on Android 5.0 or higher
                 long time=calendar.getTimeInMillis()-(23*1000);
                 //alarmManager.set(AlarmManager.RTC_WAKEUP,time,pendingIntent);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    // Wakes up the device in Doze Mode
+                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC, time, pendingIntent);
+                }
+                else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     // Call some material design APIs here
                     alarmManager.setExact(AlarmManager.RTC_WAKEUP,time,pendingIntent);
 
